@@ -18,7 +18,7 @@ RSpec.describe Stosp::Client::ExportFullReport, type: :integration do
         stub_request(:get, 'https://www.100sp.ru/org/default/apiExportFullReport')
           .to_return(body: response_body, status: 200, headers: { content_type: 'application/json' })
       end
-      
+
       it 'raise exception' do
         expect { client.export_full_report }.to raise_error(HTTParty::Error)
       end

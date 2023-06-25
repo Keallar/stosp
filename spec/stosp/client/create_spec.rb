@@ -6,17 +6,17 @@ RSpec.describe Stosp::Client::Create, type: :integration do
     context 'with successfully' do
       let(:response_body) do
         {
-          orderId: 123456,
+          orderId: 123_456,
           error: '',
           orderLink: 'https://order/123456'
         }.to_json
       end
       let(:request_body) do
         {
-          from: 123456,
+          from: 123_456,
           didFrom: 901,
           to: 9987,
-          didTo: 615235,
+          didTo: 615_235,
           recipientLastName: 'Test',
           recipientFirstName: 'Test',
           recipientPhone: '79999999',
@@ -44,17 +44,17 @@ RSpec.describe Stosp::Client::Create, type: :integration do
     context 'with error' do
       let(:response_body) do
         {
-          orderId: 123456,
+          orderId: 123_456,
           error: 'Error',
           orderLink: 'https://order/123456'
         }.to_json
       end
       let(:request_body) do
         {
-          from: 123456,
+          from: 123_456,
           didFrom: 901,
           to: 9987,
-          didTo: 615235,
+          didTo: 615_235,
           recipientLastName: 'Test',
           recipientFirstName: 'Test',
           recipientPhone: '79999999',

@@ -6,4 +6,3 @@ require 'stosp'
 
 require 'pry'
 Pry.start
-

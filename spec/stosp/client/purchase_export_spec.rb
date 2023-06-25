@@ -5,7 +5,6 @@ RSpec.describe Stosp::Client::PurchaseExport, type: :integration do
   describe '#purchase_export' do
     context 'with successfully' do
       let(:response_body) do
-
       end
     end
   end
