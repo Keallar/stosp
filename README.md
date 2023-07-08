@@ -1,33 +1,39 @@
 # Stosp
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/stosp`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
+## Introduction
+Client library for [100sp](https://www.100sp.ru/) API. Supports all proposed endpoints.
 ## Installation
-
-Install the gem and add to the application's Gemfile by executing:
-
-    $ bundle add stosp
-
-If bundler is not being used to manage dependencies, install the gem by executing:
-
-    $ gem install stosp
-
+Add following line to your Gemfile:
+```
+# Gemfile
+gem 'stosp'
+```
+Or install it system-wide:
+```
+$ gem install stosp
+```
 ## Usage
-
-TODO: Write usage instructions here
-
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/stosp.
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+First, init client with token:
+```
+token = 'YOUR_ACCESS_TOKEN'
+client = Stosp::Client.new(access_token: token)
+```
+And than talk API with options (if required):
+```
+client.purchase_export_meta(purchase)
+```
+### List of all methods
+Check the [official API docs](https://www.100sp.ru/help?category-id=59) for more information and available ```options``` of methods
+```
+available_distributors -> GET
+calculate(options) -> POST
+check_orders(mega_order_id, orders = []) -> POST
+create(options) -> POST
+export_full_report -> GET
+export_purchases_list -> GET
+import(options) -> POST
+process_orders(pid, options = {}) -> GET
+purchase_export(options = {}) -> GET
+purchase_export_meta(purchase) -> GET
+sticker_print(mega_order_ids, options = {}) -> GET
+```

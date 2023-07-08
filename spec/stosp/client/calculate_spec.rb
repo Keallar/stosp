@@ -2,6 +2,7 @@
 
 RSpec.describe Stosp::Client::Calculate, type: :integration do
   let(:client) { Stosp::Client.new(access_token: nil) }
+
   describe '#calculate' do
     context 'with successfully' do
       let(:response_body) do
@@ -22,11 +23,13 @@ RSpec.describe Stosp::Client::Calculate, type: :integration do
           volume: 1.0
         }
       end
+
       before do
         stub_request(:post, 'https://www.100sp.ru/api/distributor/delivery/calculate')
           .with(query: request_body)
           .to_return(body: response_body, status: 200, headers: { content_type: 'application/json' })
       end
+
       it 'return response with empty error' do
         expect(client.calculate(request_body)['error']).to be_empty
       end
@@ -51,6 +54,7 @@ RSpec.describe Stosp::Client::Calculate, type: :integration do
           volume: 1.0
         }
       end
+
       before do
         stub_request(:post, 'https://www.100sp.ru/api/distributor/delivery/calculate')
           .with(query: request_body)

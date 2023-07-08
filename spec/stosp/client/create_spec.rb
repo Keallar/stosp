@@ -2,6 +2,7 @@
 
 RSpec.describe Stosp::Client::Create, type: :integration do
   let(:client) { Stosp::Client.new(access_token: nil) }
+
   describe '#created' do
     context 'with successfully' do
       let(:response_body) do
@@ -30,6 +31,7 @@ RSpec.describe Stosp::Client::Create, type: :integration do
           weigth: 1.0
         }
       end
+
       before do
         stub_request(:post, 'https://www.100sp.ru/express/apiCreate')
           .with(query: request_body)
@@ -68,6 +70,7 @@ RSpec.describe Stosp::Client::Create, type: :integration do
           weigth: 1.0
         }
       end
+
       before do
         stub_request(:post, 'https://www.100sp.ru/express/apiCreate')
           .with(query: request_body)

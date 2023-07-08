@@ -2,6 +2,7 @@
 
 RSpec.describe Stosp::Client::ProcessOrders, type: :integration do
   let(:client) { Stosp::Client.new(access_token: nil) }
+
   describe '#process_orders' do
     context 'with successfully' do
       let(:response_body) do
@@ -11,7 +12,7 @@ RSpec.describe Stosp::Client::ProcessOrders, type: :integration do
           'data' =>
            [{ 'collection_name' => 'Окислительная эмульсия ActiOx с экстрактом женьшеня',
               'goods_articul' => '1163-ks',
-              'goods_name' => 'Кремообразная окислительная эмульсия 6% ActiOx Studio с экстрактом женьшеня и рисовыми протеинами, 150мл',
+              'goods_name' => 'Кремообразная окислительная эмульсия 6% ActiOx Studio, 150мл',
               'gid' => '612626',
               'user_id' => '126126',
               'user_name' => '621366',
@@ -66,17 +67,22 @@ RSpec.describe Stosp::Client::ProcessOrders, type: :integration do
            finished_orders_count
            not_delivered_orders_count]
       end
+
       before do
         stub_request(:get, 'https://www.100sp.ru/org/purchase/processOrders/api')
           .with(query: { pid: 1_001_047 })
           .to_return(body: response_body, status: 200, headers: { content_type: 'application/json' })
       end
+
       it 'return response with result: true' do
         expect(client.process_orders(1_001_047)['result']).to be_truthy
       end
 
-      it 'return response with data' do
+      it 'return response with data of Array' do
         expect(client.process_orders(1_001_047)['data']).to be_instance_of(Array)
+      end
+
+      it 'return response with data keys' do
         expect(client.process_orders(1_001_047)['data'].first.keys).to contain_exactly(*data_keys)
       end
     end
@@ -90,11 +96,13 @@ RSpec.describe Stosp::Client::ProcessOrders, type: :integration do
           'html' => '',
           'redirect' => nil }.to_json
       end
+
       before do
         stub_request(:get, 'https://www.100sp.ru/org/purchase/processOrders/api')
           .with(query: { pid: 1_001_047 })
           .to_return(body: response_body, status: 200, headers: { content_type: 'application/json' })
       end
+
       it 'raise exception' do
         expect { client.process_orders(1_001_047) }.to raise_error(HTTParty::Error)
       end

@@ -2,6 +2,7 @@
 
 RSpec.describe Stosp::Client::StickerPrint, type: :integration do
   let(:client) { Stosp::Client.new(access_token: nil) }
+
   describe '#sticker_print' do
     context 'with successfully' do
       let(:response_body) do
@@ -10,6 +11,7 @@ RSpec.describe Stosp::Client::StickerPrint, type: :integration do
           'errors' => []
         }.to_json
       end
+
       before do
         stub_request(:get, 'https://www.100sp.ru/org/sticker/apiPrint')
           .with(query: { megaorderIds: 123, count: 2, format: 'pdf' })
@@ -29,6 +31,7 @@ RSpec.describe Stosp::Client::StickerPrint, type: :integration do
           'errors' => ['error']
         }.to_json
       end
+
       before do
         stub_request(:get, 'https://www.100sp.ru/org/sticker/apiPrint')
           .with(query: { megaorderIds: 123, count: 2, format: 'pdf' })

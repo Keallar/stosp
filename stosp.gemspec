@@ -31,6 +31,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'httparty'
 
   spec.add_development_dependency 'rspec'
-  spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'webmock'
 end

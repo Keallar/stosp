@@ -30,7 +30,7 @@ module Stosp
     include Client::StickerPrint
 
     def initialize(access_token:)
-      @access_token ||= access_token
+      @access_token = access_token
       self.class.base_uri 'https://www.100sp.ru'
       self.class.headers 'x-api-key' => @access_token
     end

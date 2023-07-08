@@ -3,8 +3,8 @@
 module Stosp
   class Client
     module Import
-      def import
-        post '/org/purchase/importExport/apiImport'
+      def import(options)
+        post '/org/purchase/importExport/apiImport', options
       end
     end
   end
