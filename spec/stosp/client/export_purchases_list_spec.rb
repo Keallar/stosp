@@ -2,6 +2,7 @@
 
 RSpec.describe Stosp::Client::ExportPurchasesList, type: :integration do
   let(:client) { Stosp::Client.new(access_token: nil) }
+
   describe '#export_purchases_list' do
     context 'with successfully' do
       let(:response_body) do
@@ -14,17 +15,25 @@ RSpec.describe Stosp::Client::ExportPurchasesList, type: :integration do
           'html' => '',
           'redirect' => nil }.to_json
       end
+      let(:data_keys) do
+        %w[pid name statusLabel statusCode]
+      end
+
       before do
         stub_request(:get, 'https://www.100sp.ru/purchase/apiExportPurchasesList')
           .to_return(body: response_body, status: 200, headers: { content_type: 'application/json' })
       end
+
       it 'return response with result: true' do
         expect(client.export_purchases_list['result']).to eq(true)
       end
 
-      it 'return response with data' do
+      it 'return response with data of Array' do
         expect(client.export_purchases_list['data']).to be_instance_of(Array)
-        expect(client.export_purchases_list['data'].first).to include('pid')
+      end
+
+      it 'return response with data keys' do
+        expect(client.export_purchases_list['data'].first).to include(*data_keys)
       end
     end
 
@@ -37,6 +46,7 @@ RSpec.describe Stosp::Client::ExportPurchasesList, type: :integration do
           'html' => '',
           'redirect' => nil }.to_json
       end
+
       before do
         stub_request(:get, 'https://www.100sp.ru/purchase/apiExportPurchasesList')
           .to_return(body: response_body, status: 200, headers: { content_type: 'application/json' })

@@ -1,5 +1,10 @@
+require:
+  - rubocop-rspec
+
 AllCops:
   TargetRubyVersion: 2.6
+  Exclude:
+    - lib/stosp/logger.rb
 
 Style/StringLiterals:
   Enabled: true
@@ -11,8 +16,11 @@ Style/StringLiteralsInInterpolation:
 Layout/LineLength:
   Max: 120
 
-Style/Documentation:
-  Disable: true
-
 Metrics/ParameterLists:
   Max: 10
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context', 'let']

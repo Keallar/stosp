@@ -2,6 +2,7 @@
 
 RSpec.describe Stosp::Client::CheckOrders, type: :integration do
   let(:client) { Stosp::Client.new(access_token: nil) }
+
   describe '#check_orders' do
     let(:response_body) do
       {
@@ -23,6 +24,7 @@ RSpec.describe Stosp::Client::CheckOrders, type: :integration do
     let(:data_keys) do
       %w[articul size action successful]
     end
+
     before do
       stub_request(:post, 'https://www.100sp.ru/org/formation/apiCheckOrders')
         .with(query: { megaorderId: 405_710_374, orders: [{ articul: 3_463_653, action: 'assembled', count: 2 }] })
@@ -37,6 +39,9 @@ RSpec.describe Stosp::Client::CheckOrders, type: :integration do
     it 'return response with data' do
       expect(client.check_orders(405_710_374, [{ articul: 3_463_653, action: 'assembled', count: 2 }])['data'])
         .to be_instance_of(Array)
+    end
+
+    it 'return response with data has keys' do
       expect(client.check_orders(405_710_374, [{ articul: 3_463_653, action: 'assembled', count: 2 }])['data'].first)
         .to include(*data_keys)
     end
@@ -60,6 +65,7 @@ RSpec.describe Stosp::Client::CheckOrders, type: :integration do
         "redirect": nil
       }.to_json
     end
+
     before do
       stub_request(:post, 'https://www.100sp.ru/org/formation/apiCheckOrders')
         .with(query: { megaorderId: 405_710_374, orders: [{ articul: 3_463_653, action: 'assembled', count: 2 }] })
@@ -94,6 +100,7 @@ RSpec.describe Stosp::Client::CheckOrders, type: :integration do
         "redirect": nil
       }.to_json
     end
+
     before do
       stub_request(:post, 'https://www.100sp.ru/org/formation/apiCheckOrders')
         .with(query: { megaorderId: 405_710_374, orders: [{ articul: 3_463_653, action: 'assembled', count: 2 }] })
