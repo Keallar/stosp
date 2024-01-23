@@ -37,3 +37,7 @@ purchase_export(options = {}) -> GET
 purchase_export_meta(purchase) -> GET
 sticker_print(mega_order_ids, options = {}) -> GET
 ```
+## Contributing
+Bug reports and pull requests are welcome on GitHub at https://github.com/Keallar/stosp.
+## License
+The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
